@@ -72,3 +72,44 @@ stop:
 	@echo "Stopping front end..."
 	@-pkill -SIGTERM -f "./${FRONT_END_BINARY}"
 	@echo "Stopped front end!"
+
+## build images and push to dockerhub:
+build_dockerhub: build_dockerhub_broker build_dockerhub_logger build_dockerhub_listener build_dockerhub_mail build_dockerhub_auth build_dockerhub_front
+	@echo "Done build all services and push to dockerhub..."
+
+
+build_dockerhub_broker:
+	@echo "Build and tag broker image..."
+	cd ../broker-service && docker build -f broker-service.dockerfile -t m3kong/broker-service:1.0.0 .
+	docker push m3kong/broker-service:1.0.0
+	@echo "Done!"
+
+build_dockerhub_logger:
+	@echo "Build and tag logger image..."
+	cd ../logger-service && docker build -f logger-service.dockerfile -t m3kong/logger-service:1.0.0 .
+	docker push m3kong/logger-service:1.0.0
+	@echo "Done!"
+
+build_dockerhub_listener:
+	@echo "Build and tag listener image..."
+	cd ../listener-service && docker build -f listener-service.dockerfile -t m3kong/listener-service:1.0.0 .
+	docker push m3kong/listener-service:1.0.0
+	@echo "Done!"
+
+build_dockerhub_mail:
+	@echo "Build and tag mail image..."
+	cd ../mail-service && docker build -f mail-service.dockerfile -t m3kong/mail-service:1.0.0 .
+	docker push m3kong/mail-service:1.0.0
+	@echo "Done!"
+
+build_dockerhub_auth:
+	@echo "Build and tag mail image..."
+	cd ../authentication-service && docker build -f authentication-service.dockerfile -t m3kong/auth-service:1.0.0 .
+	docker push m3kong/auth-service:1.0.0
+	@echo "Done!"
+
+build_dockerhub_front:
+	@echo "Build and tag front-end image..."
+	cd ../front-end && docker build -f front-end.dockerfile -t m3kong/front-end:1.0.0 .
+	docker push m3kong/front-end:1.0.0
+	@echo "Done!"

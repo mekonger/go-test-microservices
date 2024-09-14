@@ -18,3 +18,11 @@ A front end web application that connects to 5 Microservices:
 - **Logger** - MongoDB which use to log event issue by other services
 - **Mail** - sends email with a specific template
 - **Listener** - consumes messages in RabbitMQ and initates a process
+
+## Build images for our microservices
+- Register account at Dockerhub
+- Build images of each service and push to Dockerhub registry with these example commands:
+```
+docker build -f logger-service.dockerfile -t m3kong/logger-service:1.0.0
+docker push m3kong/logger-service:1.0.0
+```
