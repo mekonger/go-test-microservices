@@ -26,3 +26,6 @@ A front end web application that connects to 5 Microservices:
 docker build -f logger-service.dockerfile -t m3kong/logger-service:1.0.0
 docker push m3kong/logger-service:1.0.0
 ```
+- Deploy docker swarm
+```docker stack deploy -c swarm.yml myapp```
+- Scaling up service ```docker service scale myapp_listener-service=2 ```
