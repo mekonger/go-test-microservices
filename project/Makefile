@@ -4,6 +4,7 @@ LOGGER_BINARY=loggerServiceApp
 AUTH_BINARY=authApp
 MAIL_BINARY=mailerApp
 LISTENER_BINARY=listenerApp
+FRONT_BINARY=frontEndApp
 
 ## up: starts all containers in the background without forcing build
 up:
@@ -23,6 +24,12 @@ up_build: build_broker build_logger build_listener build_auth build_mail
 down:
 	@echo "Stopping docker compose..."
 	docker-compose down
+	@echo "Done!"
+
+## build_front_linux: build the front end library as linux executable
+build_front_linux:
+	@echo "Building front-end binary..."
+	cd ../front-end && env GOOS=linux CGO_ENABLED=0 go build -o ${FRONT_BINARY} ./cmd/web
 	@echo "Done!"
 
 ## build_broker: builds the broker binary a a linux executable
@@ -80,8 +87,8 @@ build_dockerhub: build_dockerhub_broker build_dockerhub_logger build_dockerhub_l
 
 build_dockerhub_broker:
 	@echo "Build and tag broker image..."
-	cd ../broker-service && docker build -f broker-service.dockerfile -t m3kong/broker-service:1.0.0 .
-	docker push m3kong/broker-service:1.0.0
+	cd ../broker-service && docker build -f broker-service.dockerfile -t m3kong/broker-service:1.0.1 .
+	docker push m3kong/broker-service:1.0.1
 	@echo "Done!"
 
 build_dockerhub_logger:
