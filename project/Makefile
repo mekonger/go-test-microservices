@@ -120,3 +120,9 @@ build_dockerhub_front:
 	cd ../front-end && docker build -f front-end.dockerfile -t m3kong/front-end:1.0.0 .
 	docker push m3kong/front-end:1.0.0
 	@echo "Done!"
+
+build_up_caddy:
+	@echo "Build and tag caddy image..."
+	docker build -f caddy.dockerfile -t m3kong/micro-caddy:1.0.0 .
+	docker push m3kong/micro-caddy:1.0.0
+	@echo "Done!"

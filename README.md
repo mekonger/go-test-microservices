@@ -29,3 +29,6 @@ docker push m3kong/logger-service:1.0.0
 - Deploy docker swarm
 ```docker stack deploy -c swarm.yml myapp```
 - Scaling up service ```docker service scale myapp_listener-service=2 ```
+- Update service ```docker service update --image m3kong/logger-service:1.0.1 myapp_logger-service```
+- Stopping docker swarm ```docker stack rm myapp``` && ```docker swarm leave --force```
+- 
