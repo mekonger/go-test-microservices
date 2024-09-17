@@ -117,8 +117,8 @@ build_dockerhub_auth:
 
 build_dockerhub_front:
 	@echo "Build and tag front-end image..."
-	cd ../front-end && docker build -f front-end.dockerfile -t m3kong/front-end:1.0.0 .
-	docker push m3kong/front-end:1.0.0
+	cd ../front-end && docker build -f front-end.dockerfile -t m3kong/front-end:1.0.1 .
+	docker push m3kong/front-end:1.0.1
 	@echo "Done!"
 
 build_up_caddy:
